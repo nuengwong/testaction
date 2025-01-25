@@ -2,7 +2,7 @@ name: api tests with postman executed using newman cli
 on:
   push:
     branch:
-      - main
+      - master
   pull_request:
     branch:
       - "*"
@@ -16,15 +16,17 @@ jobs:
           dotnet-version: "8"
       - uses: actions/setup-node@v1
         with:
-          node-version: "18"
+          node-version: "20"
+      - run: npm install
       - run: npm install -g newman
       - name: Setup API and run tests
         run: |
           cd shell_scripts
           chmod +x ./wait-for-it.sh
-          dotnet run --project=../api/ &
+          npm start &
           API_PID=$!
           ./wait-for-it.sh -t 60 localhost:5000 -- && sh ./run-all-api-tests.sh
           kill $API_PID
         env:
-          pgconn: ${{secrets.PGCONN}}
+          DATABASE_URL: ${{PGCONN.PGCONN}}
+          PORT: 5000
