@@ -28,6 +28,6 @@ jobs:
           ./wait-for-it.sh -t 60 localhost:5000 -- && sh ./run-all-api-tests.sh
           kill $API_PID
         env:
-          DATABASE_URI: ${{secrets.PGCONN.PGCONN}}
+          DATABASE_URI: ${{secrets.MONGO_URL}}
           PORT: 5000
           NODE_ENV: development
