@@ -28,6 +28,6 @@ jobs:
           ./wait-for-it.sh -t 60 localhost:5000 -- && sh ./run-all-api-tests.sh
           kill $API_PID
         env:
-          DATABASE_URI: mongodb+srv://ohm123:ohm123@traversymedia.o0hi2.mongodb.net/SWPractice67
+          DATABASE_URI: ${{secrets.PGCONN.PGCONN}}
           PORT: 5000
           NODE_ENV: development
