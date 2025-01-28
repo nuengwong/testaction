@@ -10,7 +10,7 @@ const app = express();
 
 //Mount routers
 app.use('/api/v1/hospitals', hospitals);
-console.log(process.env.DATABASE_URL);
+//console.log(process.env.DATABASE_URL);
 
 const PORT = process.env.PORT || 5000;
 app.listen(
